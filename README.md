@@ -10,7 +10,7 @@ and so on)
 * `mxcat` has not (yet) implemented behavior to connect slurs and ties over different scores.
 
 <p align="center">
-  <img src="sample.gif" style="text-align: center" />
+  <img src="sample.gif" style="text-align: center" width="653px"/>
   </br>
   <i>Sample usage</i>
 </p>
