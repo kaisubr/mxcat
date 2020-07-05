@@ -6,13 +6,13 @@ import xml.etree.ElementTree as ET
 # Concatenate files:        python mxcat.py file*.mscx > catted.mscx
 # Preview result:           python mxcat.py file*.mscx | less -S
 # Numbered lines:           python mxcat.py file*.mscx | cat -n
-# Search debug comments:    python mxcat.py out*.mscx --debug true | grep "\[DEBUG]\"
+# Search debug comments:    python mxcat.py out*.mscx --debug | grep "\[DEBUG]\"
 # -----------------
 
 parser = argparse.ArgumentParser(description='Concatenate Musescore XML files and print on the standard output; mxcat behaves similarly to UNIX cat, where you may redirect output to another file. You can pipe to cat if you want access to cat-like options (such as -n, -v, and so on)')
 
-parser.add_argument('names', metavar='Files', type=str, nargs='+', help='Files to concatenate.')
-parser.add_argument('--staff', metavar='Staves', type=int, nargs='+', default=[0], help='Staff numbers to print. Certain instruments (like piano) crossing multiple staves might require multiple arguments, such as --staff 1 2. Furthermore, --staff 2 1 is equivalent in nature to --staff 1 2, in order to preserve order during concatenation. Default: 0, mxcat will print all parts.')
+parser.add_argument('names', metavar='files', type=str, nargs='+', help='Files to concatenate.')
+parser.add_argument('--staff', metavar='staves', type=int, nargs='+', default=[0], help='Staff numbers to print. Certain instruments (like piano) crossing multiple staves might require multiple arguments, such as --staff 1 2. Furthermore, --staff 2 1 is equivalent in nature to --staff 1 2, in order to preserve order during concatenation. Default: 0, mxcat will print all parts.')
 parser.add_argument('--debug', action='store_true', help='Print debug comments into output, which is grep-able with [DEBUG].', default=False)
 
 # get arguments 

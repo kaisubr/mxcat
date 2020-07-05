@@ -1,7 +1,10 @@
 # mxcat
-Command-line tool to concatenate MuseScore XML files (akin to UNIX cat behavior) while also generating individual parts on a finer staff-level basis.
-* Merging was removed in MuseScore 3 because it was unstable, and there have been no successful attempts to revive it ([thread 1](https://musescore.org/en/node/291978), [thread 2](https://musescore.org/en/node/264845), [thread 3](https://musescore.org/en/node/264733), and so on... have been unsuccessful and lead to dead ends). 
-* I'm not too familiar with the XML syntax that MuseScore uses, but I gave it my best shot, in case someone out there had the same problems I did.
+Command-line tool to concatenate MuseScore XML files (akin to UNIX cat behavior) while also generating individual parts on a finer staff-level basis (such as solely the 1st staff of the 2-stave piano part).
+* Merging was removed in MuseScore 3 because it was unstable, and there have been no successful attempts to revive it ([thread 1](https://musescore.org/en/node/291978), [thread 2](https://musescore.org/en/node/264845), [thread 3](https://musescore.org/en/node/264733), and so on... lead to dead ends). 
+
+```
+usage: mxcat.py [-h] [--staff staves [staves ...]] [--debug] files [files ...]
+```
 * In general, mxcat will concatentate Musescore XML files and print on the standard output; `mxcat`
 behaves similarly to UNIX `cat`, where you may redirect output to another file.
 You can pipe to cat if you want access to `cat`-like options (such as -n, -v,
@@ -16,7 +19,7 @@ and so on)
 </p>
 
 ## Sample usage:
-Concatenate `file1.mscx`, and `file2.mscx`, and redirect output to `result.mscx`:        
+Concatenate `file1.mscx`, and `file2.mscx`, and redirect output to `result.mscx`:
 ```bash
 python mxcat.py file1.mscx file2.mscx > result.mscx
 ```
@@ -26,24 +29,24 @@ Concatenate several files, but only keep the first 2 staves.
 python mxcat.py file*.mscx --staff 1 2 > result.mscx
 ```
 
-Search debug comments:    
+Search debug comments:
 ```bash
-python mxcat.py out*.mscx --debug true | grep "\[DEBUG\]"
+python mxcat.py out*.mscx --debug | grep "\[DEBUG\]"
 ```
 
-View help message:        
+View help message:
 ```bash
 python mxcat.py -h | less 
 ```
 
-Numbered lines:           
+Numbered lines:
 ```bash
 python mxcat.py file*.mscx | cat -n | less -S
 ```
 
 ## Detailed help:
 ```
-usage: mxcat.py [-h] [--staff Staves [Staves ...]] [--debug] Files [Files ...]
+usage: mxcat.py [-h] [--staff staves [staves ...]] [--debug] files [files ...]
 
 Concatenate Musescore XML files and print on the standard output; mxcat
 behaves similarly to UNIX cat, where you may redirect output to another file.
@@ -51,11 +54,11 @@ You can pipe to cat if you want access to cat-like options (such as -n, -v,
 and so on)
 
 positional arguments:
-  Files                 Files to concatenate.
+  files                 Files to concatenate.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --staff Staves [Staves ...]
+  --staff staves [staves ...]
                         Staff numbers to print. Certain instruments (like
                         piano) crossing multiple staves might require multiple
                         arguments, such as --staff 1 2. Furthermore, --staff 2
