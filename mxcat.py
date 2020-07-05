@@ -11,14 +11,16 @@ import xml.etree.ElementTree as ET
 
 parser = argparse.ArgumentParser(description='Concatenate Musescore XML files and print on the standard output; mxcat behaves similarly to UNIX cat, where you may redirect output to another file. You can pipe to cat if you want access to cat-like options (such as -n, -v, and so on)')
 
-parser.add_argument('names', metavar='F', type=str, nargs='+', help='Files to concatenate.')
-parser.add_argument('--debug', metavar='Debug', type=bool, nargs='?', help='Print debug comments into output, which is grep-able with [DEBUG].', default=False)
+parser.add_argument('names', metavar='Files', type=str, nargs='+', help='Files to concatenate.')
+parser.add_argument('--staff', metavar='Staves', type=int, nargs='+', default=[0], help='Staff numbers to print. Certain instruments (like piano) crossing multiple staves might require multiple arguments, such as --staff 1 2. Furthermore, --staff 2 1 is equivalent in nature to --staff 1 2, in order to preserve order during concatenation. Default: 0, mxcat will print all parts.')
+parser.add_argument('--debug', action='store_true', help='Print debug comments into output, which is grep-able with [DEBUG].', default=False)
 
 # get arguments 
 args = parser.parse_args()
 
 # args.names with nargs + as list
 files = args.names
+stf_print = sorted(list(args.staff))
 debug = args.debug
 
 # get header + metadata portion as lines
@@ -83,13 +85,21 @@ for f in files:
                         staff_data[sf_id] += item + "\n"
     del root
 
-# Add closing tag to end of each staff.
+# Add closing tag to end of each staff in list data.
 for val in range(1, num_staffs + 1):
     staff_data[val] += "\n</Staff>"
 
-# print the staffs
-for data in staff_data:
-    print(data)
+if stf_print[0] == 0:
+    if debug:
+        print("<!--[DEBUG] Printing all staffs -->")
+    # print every staff
+    for data in staff_data:
+        print(data)
+else:
+    for st in stf_print:
+        if debug:
+            print("<!--[DEBUG] Printing staff", st, "-->")
+        print(staff_data[st])
 
 # print footer
 print("</Score>\n</museScore>")
