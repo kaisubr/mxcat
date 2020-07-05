@@ -17,9 +17,14 @@ and so on)
 
 ## Sample usage:
 
-Concatenate several files:        
+Concatenate `file0.mscx`, `file1.mscx`, and `file2.mscx`, and redirect output to `result.mscx`:        
 ```bash
 python mxcat.py file*.mscx > result.mscx
+```
+
+Concatenate several files, but only keep the first 2 staves.
+```bash
+python mxcat.py file*.mscx --staff 1 2 --debug > result.mscx
 ```
 
 View help message:        
