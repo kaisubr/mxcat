@@ -34,7 +34,7 @@ python mxcat.py file*.mscx --staff 1,2 > result.mscx
 
 Split `hamilton.mscx` into three parts: staves 1 and 2, then staves 3 and 4, then staves 15 and 16. Finally, save the output into `result_1,2.mscx`, `result_3,4.mscx`, and `result_15,16.mscx`. 
 ```bash
-python mxcat.py hamilton.mscx --staff 1,2:3,4:15,16 --output helpless.mscx
+python mxcat.py hamilton.mscx --staff 1,2:3,4:15,16 --output result.mscx
 ```
 
 Count the number of staves in `hamilton.mscx`:
