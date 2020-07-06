@@ -1,5 +1,5 @@
 # mxcat
-Command-line tool to concatenate MuseScore XML files (akin to UNIX cat behavior) while also generating individual parts on a finer staff-level basis (such as solely the 1st staff of the 2-stave piano part).
+Command-line tool to concatenate MuseScore XML files (akin to UNIX cat behavior) while also generating individual parts on a finer staff-level basis (such as solely the upper staff of a 2-staff piano part).
 ```
 usage: mxcat.py [-h] [--staff staves [staves ...]] [--debug] files [files ...]
 ```
