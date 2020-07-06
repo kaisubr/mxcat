@@ -5,7 +5,7 @@ usage: mxcat.py [-h] [--output output] [--staff staves] [--count] [--debug]
                 files [files ...]
 ```
 * Merging was removed in MuseScore 3 because it was unstable, and there have been no successful attempts to revive it ([thread 1](https://musescore.org/en/node/291978), [thread 2](https://musescore.org/en/node/264845), [thread 3](https://musescore.org/en/node/264733), and so on... lead to dead ends). 
-* Generating files is limited to individual parts in MuseScore, but `mxcat` extends this behavior to select staffs for each file. For instance, you could export the first 4 staves into a file, and the remaining 12 staves into another file. This isn't supported by MuseScore.
+* Generating files is limited to individual parts in MuseScore, but `mxcat` extends this behavior to _select staffs for each file_. For instance, you could export the first 4 staves (such as the brass) into a file, and the remaining 12 staves (such as the woodwinds) into another file. This isn't supported by MuseScore!
 
 <p align="center">
   <img src="sample.gif" style="text-align: center" width="653px"/>
