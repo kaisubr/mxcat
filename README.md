@@ -58,7 +58,9 @@ Numbered lines:
 python mxcat.py file*.mscx | cat -n | less -S
 ```
 
-## Detailed help:
+## More fun stuff
+
+### Detailed help:
 ```
 usage: mxcat.py [-h] [--output output] [--staff staves] [--count] [--debug]
                 files [files ...]
@@ -91,3 +93,16 @@ optional arguments:
                    [DEBUG].
 
 ```
+
+### Troubleshoot
+* Why am I getting `BrokenPipeError: [Errno 32] Broken pipe` when piping the output?
+  * This could happen if you are redirecting the standard output to something like `less`, but then you exit `less` without reading everything from it's input (that is, you exit `less` without scrolling all the way down).
+  * As a result, Python will exit with the aforementioned `BrokenPipeError` because not all of it's output was processed through the pipe. This is natural behavior.
+  * If this is annoying, you can try letting `cat` handle it instead:
+  ```
+   python3 mxcat.py file.mscx | cat | less
+  ```
+  * Alternatively, redirect the output to a different file:
+  ```
+  python3 mxcat.py file.mscx > output.tmp && less output.tmp && rm -rvf output.tmp
+  ```
