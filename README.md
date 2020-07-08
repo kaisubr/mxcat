@@ -98,11 +98,11 @@ optional arguments:
 * Why am I getting `BrokenPipeError: [Errno 32] Broken pipe` when piping the output?
   * This could happen if you are redirecting the standard output to something like `less`, but then you exit `less` without reading everything from `less`'s input (that is, you exit `less` without scrolling all the way down).
   * As a result, Python will exit with the aforementioned `BrokenPipeError` because the pipe was closed before the script's output was completely written. This is natural behavior.
-  * If this is annoying, you can try letting `cat` handle it instead:
+  * If this is annoying, for small files, you can try letting `cat` handle it instead:
   ```
    python3 mxcat.py file.mscx | cat | less
   ```
-  * Alternatively, redirect the output to a different file:
+  * Alternatively, a more robust approach would be to redirect the output to a different file:
   ```
   python3 mxcat.py file.mscx > output.tmp && less output.tmp && rm -rvf output.tmp
   ```
