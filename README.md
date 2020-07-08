@@ -96,8 +96,8 @@ optional arguments:
 
 ### Troubleshoot
 * Why am I getting `BrokenPipeError: [Errno 32] Broken pipe` when piping the output?
-  * This could happen if you are redirecting the standard output to something like `less`, but then you exit `less` without reading everything from it's input (that is, you exit `less` without scrolling all the way down).
-  * As a result, Python will exit with the aforementioned `BrokenPipeError` because not all of it's output was processed through the pipe. This is natural behavior.
+  * This could happen if you are redirecting the standard output to something like `less`, but then you exit `less` without reading everything from `less`'s input (that is, you exit `less` without scrolling all the way down).
+  * As a result, Python will exit with the aforementioned `BrokenPipeError` because the pipe was closed before the script's output was completely written. This is natural behavior.
   * If this is annoying, you can try letting `cat` handle it instead:
   ```
    python3 mxcat.py file.mscx | cat | less
